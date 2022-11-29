@@ -656,6 +656,10 @@ UsbGetOneString (
     return NULL;
   }
 
+  // MACHIRY: BUG: Double fetch bug: We read twice from UsbDev
+  // The Desc.Length might change between 2 reads and we might end up reading
+  // string whose length is more than Desc.Length
+
   Buf = AllocateZeroPool (Desc.Length);
 
   if (Buf == NULL) {

@@ -219,6 +219,7 @@ ExtractGuidedSectionRegisterHandlers (
   //
   GuidData = AllocateCopyPool (sizeof (GUID), (VOID *)SectionGuid);
   if (GuidData != NULL) {
+    // MACHIRY: BUG BUG! What happens if the allocation fails? We return success
     gBS->InstallConfigurationTable ((EFI_GUID *)SectionGuid, GuidData);
   }
 

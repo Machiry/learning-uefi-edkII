@@ -1115,7 +1115,7 @@ CoreProcessFvImageFile (
           } else {
             //
             // Move FvImage into the aligned buffer and release the original buffer.
-            //
+            // MACHIRY: BUG FvUsedSize could be more than BufferSize
             if (GetFvUsedSize (FvHeader, &FvUsedSize, &EraseByte)) {
               //
               // Copy the used bytes and fill the rest with the erase value.
@@ -1194,6 +1194,9 @@ CoreProcessFvImageFile (
   @param  Context               Event Context, not used.
 
 **/
+// MACHIRY: This is the function which gets called when a FV is added to the system.
+// This reads the DXE drivers and put them into mDiscoveredList which will be later processed
+// and loaded. 
 VOID
 EFIAPI
 CoreFwVolEventProtocolNotify (

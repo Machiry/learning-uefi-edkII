@@ -414,6 +414,7 @@ PeiCore (
   // Complete PEI Core Service initialization
   //
   InitializeSecurityServices (&PrivateData.Ps, OldCoreData);
+  // MACHIRY: This is where all the FV gets added to ->Fv of the PrivateData
   InitializeDispatcherData (&PrivateData, OldCoreData, SecCoreData);
   InitializeImageServices (&PrivateData, OldCoreData);
 
@@ -486,6 +487,8 @@ PeiCore (
   //
   // Call PEIM dispatcher
   //
+  // MACHIRY: This is where all PEIMs gets loaded and their entry point
+  // is called.
   PeiDispatcher (SecCoreData, &PrivateData);
 
   if (PrivateData.HobList.HandoffInformationTable->BootMode != BOOT_ON_S3_RESUME) {

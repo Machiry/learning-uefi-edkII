@@ -291,7 +291,7 @@ DxeLoadCore (
     }
 
     ASSERT_EFI_ERROR (Status);
-
+    // MACHIRY: BUG: Check this.: TODO
     Status = S3Resume->S3RestoreConfig2 (S3Resume);
     ASSERT_EFI_ERROR (Status);
   } else if (BootMode == BOOT_IN_RECOVERY_MODE) {
@@ -316,6 +316,7 @@ DxeLoadCore (
     }
 
     REPORT_STATUS_CODE (EFI_PROGRESS_CODE, (EFI_SOFTWARE_PEI_MODULE | EFI_SW_PEI_PC_CAPSULE_LOAD));
+    // MACHIRY: Check this: BUG
     Status = PeiRecovery->LoadRecoveryCapsule (PeiServices, PeiRecovery);
     if (EFI_ERROR (Status)) {
       DEBUG ((DEBUG_ERROR, "Load Recovery Capsule Failed.(Status = %r)\n", Status));
@@ -356,6 +357,7 @@ DxeLoadCore (
       // Whether failed, still goes to Firmware Update boot path. BDS will clear corresponding indicator and reboot later on
       //
       if (!EFI_ERROR (Status)) {
+        // MACHIRY: BUG CHECK This
         Status = PeiCapsuleOnDisk->LoadCapsuleOnDisk (PeiServices, PeiCapsuleOnDisk);
       }
     }

@@ -141,7 +141,7 @@ SmmEfiNotAvailableYetArg5 (
   Software SMI handler that is called when a Legacy Boot event is signalled.  The SMM
   Core uses this signal to know that a Legacy Boot has been performed and that
   gSmmCorePrivate that is shared between the UEFI and SMM execution environments can
-  not be accessed from SMM anymore since that structure is considered free memory by
+  not be accessed from SMM anymore since that structure is cgDxeCoreSTonsidered free memory by
   a legacy OS. Then the SMM Core also install SMM Legacy Boot protocol to notify SMM
   driver that system enter legacy boot.
 

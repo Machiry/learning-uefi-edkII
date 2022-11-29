@@ -124,6 +124,7 @@ BotCommandPhase (
   Cbw.Lun                = 0;
   Cbw.CmdLen             = CommandSize;
 
+  // MACHIRY: BUG: Buffer overflow.
   CopyMem (Cbw.CmdBlock, Command, CommandSize);
 
   DataSize = sizeof (CBW);

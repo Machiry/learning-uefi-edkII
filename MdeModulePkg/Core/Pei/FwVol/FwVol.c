@@ -688,6 +688,7 @@ FirmwareVolumeInfoPpiNotifyCallback (
                           (VOID **)&DepexData
                           );
         if (!EFI_ERROR (Status)) {
+          // MACHIRY DEPEX Readiness Check done here.
           if (!PeimDispatchReadiness (PeiServices, DepexData)) {
             //
             // Dependency is not satisfied.
@@ -813,6 +814,7 @@ ProcessSection (
   Status        = EFI_NOT_FOUND;
   PpiOutput     = NULL;
   PpiOutputSize = 0;
+  // MACHIRY: BUG BUG This entire thing is buggy.
   while (ParsedLength < SectionSize) {
     if (IS_SECTION2 (Section)) {
       ASSERT (SECTION2_SIZE (Section) > 0x00FFFFFF);
@@ -1514,6 +1516,7 @@ ProcessFvFile (
           //
           // Copy the used bytes and fill the rest with the erase value.
           //
+          // MACHIRY: BUG!! There is no check on FvUsedSize!! Which can be greater than FvLength!!
           CopyMem (NewFvBuffer, FvHeader, (UINTN)FvUsedSize);
           SetMem (
             (UINT8 *)NewFvBuffer + FvUsedSize,

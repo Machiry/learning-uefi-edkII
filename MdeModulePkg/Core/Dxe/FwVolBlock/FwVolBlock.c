@@ -503,7 +503,7 @@ ProduceFVBProtocolOnBuffer (
   //
   // Init the block caching fields of the device
   // First, count the number of blocks
-  //
+  // MACHIRY: BUG: Integer overflow of NumBlocks here!
   FvbDev->NumBlocks = 0;
   for (PtrBlockMapEntry = FwVolHeader->BlockMap;
        PtrBlockMapEntry->NumBlocks != 0;
@@ -528,7 +528,7 @@ ProduceFVBProtocolOnBuffer (
 
   //
   // Last, fill in the cache with the linear address of the blocks
-  //
+  // Machiry: Here, we are using PtrBlockMapEntry->NumBlocks as the loop limit - heap buffer overflow.
   BlockIndex   = 0;
   LinearOffset = 0;
   for (PtrBlockMapEntry = FwVolHeader->BlockMap;

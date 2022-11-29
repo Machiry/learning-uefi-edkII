@@ -1526,7 +1526,8 @@ ScsiDiskUnmap (
     ReturnStatus = EFI_DEVICE_ERROR;
     goto Done;
   }
-
+  // MACHIRY: BUG If blocks is 0 then there is  a subsequent interger overflow
+  // nad then there is a heap buffer overfwrite in rthe while loop.
   BlkDespCnt        = (UINT32)((Blocks - 1) / MaxLbaCnt + 1);
   UnmapParamListLen = (UINT16)(sizeof (EFI_SCSI_DISK_UNMAP_PARAM_LIST_HEADER)
                                + BlkDespCnt * sizeof (EFI_SCSI_DISK_UNMAP_BLOCK_DESP));
